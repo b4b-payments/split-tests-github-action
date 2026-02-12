@@ -1,5 +1,5 @@
 name: Split Tests
-author: chaosaffe@users.noreply.github.com
+author: do-not-reply@b4bpayments.com
 description: Splits test suite for parallelization with equal time
 inputs:
   split-total:
@@ -36,7 +36,15 @@ runs:
   using: composite
   steps:
     - name: Install split_tests
-      run: curl -L "https://github.com/leonid-shevtsov/split_tests/releases/latest/download/split_tests.linux.gz" | gunzip -v > split_tests && chmod +x split_tests
+      run: |
+        BINARY_URL=https://github.com/b4b-payments/split_tests/releases/latest/download
+        if uname -m | grep -q arm
+        then
+          BINARY_URL=$BINARY_URL/split_tests.linux.arm64.gz
+        else
+          BINARY_URL=$BINARY_URL/split_tests.linux.gz
+        fi
+        curl -L $BINARY_URL | gunzip -v > split_tests && chmod +x split_tests
       shell: bash
     - name: Split Tests
       id: split-tests

@@ -71,7 +71,7 @@ jobs:
         runner-index: ${{ fromjson(needs.runner-indexes.outputs.json) }}
     steps:
       - uses: actions/checkout@v2
-      - uses: chaosaffe/split-tests@v1-alpha.1
+      - uses: b4b-payments/split-tests-github-action@v1
         id: split-tests
         name: Split tests
         with:
@@ -85,4 +85,4 @@ The complete workflow can be found at [.github/workflows/example.yaml](.github/w
 
 ## Dependencies
 
-This action uses [leonid-shevtsov/split_tests](https://github.com/leonid-shevtsov/split_tests) under-the-hood to accomplish the test splitting
+This action uses [b4b-payments/split_tests](https://github.com/b4b-payments/split_tests) under-the-hood to accomplish the test splitting
