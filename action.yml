@@ -38,7 +38,7 @@ runs:
     - name: Install split_tests
       run: |
         BINARY_URL=https://github.com/b4b-payments/split_tests/releases/latest/download
-        if uname -m | grep -q arm
+        if [ $RUNNER_ARCH = ARM -o $RUNNER_ARCH = ARM64 ]
         then
           BINARY_URL=$BINARY_URL/split_tests.linux.arm64.gz
         else
@@ -70,7 +70,7 @@ runs:
 
         echo $TESTS
 
-        echo "test-suite=${TESTS}" >> $GITHUB_OUTPUT          
+        echo "test-suite=${TESTS}" >> $GITHUB_OUTPUT
       shell: bash
 branding:
   icon: shuffle
